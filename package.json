@@ -1,7 +1,7 @@
 {
-  "name": "vircadia_screenshare_relay",
+  "name": "Overte_screenshare_relay",
   "version": "1.0.0",
-  "description": "Vircadia Screenshare Relay",
+  "description": "Overte Screenshare Relay",
   "type": "module",
   "scripts": {
     "docker": "npm install && node screenshare-relay.js",
@@ -11,6 +11,6 @@
   "dependencies": {
     "express": "^4.18.2",
     "public-ip": "^6.0.1",
-    "ws": "8.12.0"
+    "ws": "^8.12.0"
   }
 }

@@ -2,7 +2,7 @@
 //  screenshare-relay.js
 //
 //  Created by Kalila L. on 17 Oct 2020
-//  Copyright 2020 Vircadia and contributors.
+//  Copyright 2020 Overte and contributors.
 //
 //  Distributed under the Apache License, Version 2.0.
 //  See the accompanying file LICENSE or http://www.apache.org/licenses/LICENSE-2.0.html
@@ -23,8 +23,8 @@ import fs from 'fs'
 import Express from 'express';
 import http from 'http'
 import { publicIpv4 } from 'public-ip';
-import { WebSocketServer } from 'ws';
-import {cwd} from 'process'
+import { WebSocket, WebSocketServer } from 'ws';
+import { cwd } from 'process';
 
 var server = Express();
 
@@ -58,7 +58,6 @@ var RECORD_STREAM = false;
 
 // Websocket Server
 var socketServer = new WebSocketServer({path: "/" + WEBSOCKET_SECRET, port: WEBSOCKET_PORT, perMessageDeflate: false})
-//var socketServer = new WebSocket.Server({path: "/" + WEBSOCKET_SECRET, port: WEBSOCKET_PORT, perMessageDeflate: false});
 
 socketServer.connectionCount = 0;
 
@@ -102,8 +101,7 @@ var streamServer = http.createServer( function (request, response) {
         response.end();
     }
     
-    //response.connection.setTimeout(0);
-    response.setTimeout(0);
+    response.connection.setTimeout(0);
     console.log(
         'Stream Connected: ' +
         request.socket.remoteAddress + ':' +

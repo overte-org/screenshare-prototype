@@ -1,4 +1,4 @@
-# Screenshare Prototype for Vircadia
+# Screenshare Prototype for Overte
 
 ## Get Started
 
