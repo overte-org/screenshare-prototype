@@ -1,4 +1,4 @@
-# Screenshare Prototype for Vircadia
+# Screenshare Prototype for Overte
 
 ## Get Started
 
@@ -86,3 +86,14 @@ Client
 Server
 * [node.js](https://nodejs.org/en/)
     * And the libraries found in the package.json
+
+## Docker
+
+To install this service via Docker (Default Values Only)
+
+```bash
+docker build -t overte-screenshare:latest .
+```
+```bash
+docker run -d -p 8020-8022:8020-8022 overte-screenshare:latest
+```

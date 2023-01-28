@@ -3,7 +3,9 @@
 //  index.html
 //
 //  Created by Kalila L. on 17 Oct 2020
+//  Updated by R3ido101 on 28 Jan 2023
 //  Copyright 2020 Vircadia and contributors.
+//  Copyright 2023 Overte and contributors.
 //
 //  Distributed under the Apache License, Version 2.0.
 //  See the accompanying file LICENSE or http://www.apache.org/licenses/LICENSE-2.0.html
@@ -14,13 +16,13 @@
 
 <html lang="en">
     <head>
-        <title>Vircadia Screenshare</title>
+        <title>Overte Screenshare</title>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     </head>
 
     <style>
         body {
-            background: rgba(0,0,0,1.0);
+            background: rgb(0, 0, 0);
             margin: 0;
             overflow: hidden;
         }
@@ -33,7 +35,7 @@
         }
     </style>
 
-    <body onload="initialize()" id="vircadiaBody">
+    <body onload="initialize()" id="OverteBody">
         <select id="propName" onchange="loadVal()">
             <option value="audioBufferSize">audioBufferSize</option>
             <option value="videoBufferSize">videoBufferSize</option>
@@ -79,7 +81,7 @@
 
             function initialize() {
                 var canvas = document.getElementById('mainPlayer');
-                var pageBody = document.getElementById('vircadiaBody');
+                var pageBody = document.getElementById('OverteBody');
 
                 //canvas.addEventListener('click', function(evt) { evt.shiftKey && location.reload(); }, false);
                 //canvas.addEventListener('click', function() { location.reload(); }, false);
@@ -144,7 +146,7 @@
                         var newHeightPadding = (h - canvasheight) / 2;
                         var newWidthPadding = (w - canvaswidth) / 2;
                 
-                        //DO NOT SET IF RUNNING IN Vircadia
+                        //DO NOT SET IF RUNNING IN Overte
                         if(!navigator.userAgent.includes('QtWebEngine')) {
                             pageBody.style.padding = newHeightPadding + 'px ' + newWidthPadding + 'px';
                         }
