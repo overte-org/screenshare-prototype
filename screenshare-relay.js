@@ -19,14 +19,14 @@ if (typeof(PhusionPassenger) != 'undefined') {
     PhusionPassenger.configure({ autoInstall: false });
 }
 
-var fs = require('fs');
-var express = require('express');
-var http = require('http');
-const path = require('path');
-const publicIp = require('public-ip');
-WebSocket = require('ws');
+import fs from 'fs'
+import Express from 'express';
+import http from 'http'
+import { publicIpv4 } from 'public-ip';
+import { WebSocketServer } from 'ws';
+import {cwd} from 'process'
 
-var server = express();
+var server = Express();
 
 function getArgs() {
     const args = process.argv.slice(2);
@@ -57,7 +57,8 @@ var CLIENT_HTTP_PORT = args.client_http_port || 8022;
 var RECORD_STREAM = false;
 
 // Websocket Server
-var socketServer = new WebSocket.Server({path: "/" + WEBSOCKET_SECRET, port: WEBSOCKET_PORT, perMessageDeflate: false});
+var socketServer = new WebSocketServer({path: "/" + WEBSOCKET_SECRET, port: WEBSOCKET_PORT, perMessageDeflate: false})
+//var socketServer = new WebSocket.Server({path: "/" + WEBSOCKET_SECRET, port: WEBSOCKET_PORT, perMessageDeflate: false});
 
 socketServer.connectionCount = 0;
 
@@ -101,7 +102,8 @@ var streamServer = http.createServer( function (request, response) {
         response.end();
     }
     
-    response.connection.setTimeout(0);
+    //response.connection.setTimeout(0);
+    response.setTimeout(0);
     console.log(
         'Stream Connected: ' +
         request.socket.remoteAddress + ':' +
@@ -136,16 +138,17 @@ var streamServer = http.createServer( function (request, response) {
 // Client HTTP Server
 var serverPublicIP;
 
+
 server.get('/api/wsSource', (req, res, next) => {
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify({ wsSource: 'ws://' + serverPublicIP + ':' + WEBSOCKET_PORT + '/' }));
     next();
 });
-server.use('/', express.static(path.join(__dirname + '/client')));
+server.use('/', Express.static(cwd() + '/client'));
 server.listen(CLIENT_HTTP_PORT);
 
 (async () => {
-    serverPublicIP = await publicIp.v4() || '127.0.0.1';
+    serverPublicIP = await publicIpv4() || '127.0.0.1';
 
     console.log('Listening for incoming MPEG-TS Stream on http://' + serverPublicIP + ':' + STREAM_PORT + '/' + STREAM_SECRET);
     console.log('Awaiting WebSocket connections on ws://' + serverPublicIP + ':' + WEBSOCKET_PORT + '/' + WEBSOCKET_SECRET);
