@@ -59,7 +59,7 @@ var CLIENT_HTTP_PORT = args.client_http_port || 8022;
 var RECORD_STREAM = false;
 
 // Websocket Server
-var socketServer = new WebSocketServer({path: "/" + WEBSOCKET_SECRET, port: WEBSOCKET_PORT, perMessageDeflate: false})
+var socketServer = new WebSocketServer({path: "/" + WEBSOCKET_SECRET, port: WEBSOCKET_PORT, perMessageDeflate: false});
 
 socketServer.connectionCount = 0;
 
